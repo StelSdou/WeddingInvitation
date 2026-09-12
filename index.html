@@ -6,7 +6,14 @@
     <title>Ανδρέας & Ελένη</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-closed">
+    <div class="cover" id="cover" aria-label="Open invitation" role="button" tabindex="0">
+        <div class="cover-inner">
+            <h1 class="cover-title">Ανδρέας &amp; Ελένη</h1>
+            <span class="cover-date">01.11.2026</span>
+        </div>
+    </div>
+
     <div class="top">
         <img class="hero-image" src="img/birds.png" alt="Andreas & Eleni">
     </div>
@@ -15,7 +22,7 @@
             <h2 class="mainT">
                 <span class="gold">M</span>ε μεγάλη χαρά σας προσκαλούμε στο μυστήριο του γάμου μας την
                 <span class="gold">Κυριακή 1η Νοεμβρίου</span> στις <span class="gold">5:00</span>
-                το απόγευμα στον <span class="gold">Ιερό Ναό Αγίου Ιεροθέου</span> στο Περιστέρι.
+                το απόγευμα στον <a class="gold inline-link" href="https://www.google.com/maps/search/?api=1&query=%CE%99%CE%B5%CF%81%CF%8C%CF%82+%CE%9D%CE%B1%CF%8C%CF%82+%CE%91%CE%B3%CE%B9%CE%BF%CF%85+%CE%99%CE%B5%CF%81%CE%BF%CE%B8%CE%AD%CE%BF%CF%85+%CE%A0%CE%B5%CF%81%CE%B9%CF%83%CF%84%CE%AD%CF%81%CE%B9" target="_blank" rel="noopener noreferrer">Ιερό Ναό Αγίου Ιεροθέου</a> στο Περιστέρι.
             </h2>
             <h2 class="secT">
                 Η παρουσία σας θα μας τιμήσει ιδιαίτερα και θα κάνει τη στιγμή ακόμη πιο ξεχωριστή για μας.
@@ -33,7 +40,77 @@
             </h3>
         </div>
 
-        <h1 class="bottom">Ανδρέας & Ελένη<br><span>01.11.2026</span></h1>
+        <div class="details">
+            <p>
+                <span class="label">Αριθμός λογαριασμού:</span>
+                <button class="copy-button" type="button" data-copy="GR5602602510000510201928322">GR5602602510000510201928322</button>
+            </p>
+            <p>
+                <span class="label">IRIS:</span>
+                <button class="copy-button phone" type="button" data-copy="6943242781" data-tel="tel:+306943242781">Ανδρέας: 6943242781</button>
+                /
+                <button class="copy-button phone" type="button" data-copy="6941421556" data-tel="tel:+306941421556">Ελένη: 6941421556</button>
+            </p>
+        </div>
+
+        <h1 class="bottom">Ανδρέας &amp; Ελένη<br><a class="date-link" href="https://calendar.google.com/calendar/u/0/r/eventedit?text=Γάμος+Ανδρέα+%26+Ελένης&location=Ιερός+Ναός+Αγίου+Ιεροθέου,+Περιστέρι&dates=20261101T170000Z/20261101T180000z" target="_blank" rel="noopener noreferrer">01.11.2026</a></h1>
     </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        const toast = document.getElementById('toast');
+        const cover = document.getElementById('cover');
+
+        function openInvitation() {
+            document.body.classList.add('page-open');
+            document.body.classList.remove('page-closed');
+            cover.classList.add('hidden');
+        }
+
+        cover.addEventListener('click', openInvitation);
+        cover.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openInvitation();
+            }
+        });
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(showToast.timer);
+            showToast.timer = setTimeout(() => toast.classList.remove('show'), 1800);
+        }
+
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', async () => {
+                const value = button.dataset.copy;
+                const tel = button.dataset.tel;
+
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(value);
+                    } else {
+                        const temp = document.createElement('textarea');
+                        temp.value = value;
+                        document.body.appendChild(temp);
+                        temp.select();
+                        document.execCommand('copy');
+                        temp.remove();
+                    }
+                    showToast('Αντιγράφηκε: ' + value);
+                } catch (error) {
+                    showToast('Δεν έγινε αντιγραφή');
+                }
+
+                if (tel) {
+                    setTimeout(() => {
+                        window.location.href = tel;
+                    }, 300);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
