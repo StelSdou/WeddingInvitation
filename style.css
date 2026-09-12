@@ -1,0 +1,154 @@
+:root {
+    --main-color: #f8f3ee;
+    --secondary-color: #f1e6d2;
+    --section-glow: #f9f2e6;
+    --text-color-black: #5b4a3d;
+    --text-color-gold: #c79d47;
+    --text-color-gold-deep: #a67b2d;
+    --line-color: rgba(199, 157, 71, 0.32);
+    --shadow-soft: rgba(80, 58, 30, 0.12);
+    --margin: 26px;
+    --padding: 28px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Z003', 'Zapf Chancery', cursive;
+    background: linear-gradient(180deg, var(--secondary-color) 0%, var(--main-color) 28%, var(--main-color) 100%);
+    color: var(--text-color-black);
+    min-height: 100vh;
+    text-align: center;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 34vh;
+    background: radial-gradient(circle at top, var(--section-glow) 0%, var(--secondary-color) 48%, #eadcc3 100%);
+    border-bottom: 1px solid var(--line-color);
+    box-shadow: inset 0 -12px 20px rgba(255,255,255,0.2);
+}
+
+.top .hero-image {
+    width: min(520px, 62vw);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 16px rgba(155, 117, 36, 0.14));
+    opacity: 0.96;
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px 18px;
+    font-size: clamp(0.95rem, 1.2vw, 1.25rem);
+    line-height: 1.7;
+    overflow: hidden;
+}
+
+.text {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.main .text h2 {
+    display: block;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+}
+
+.main .text .secT {
+    margin-top: var(--margin);
+}
+
+.gold {
+    color: var(--text-color-gold);
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.main .cast {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+
+    position: relative;
+    box-shadow: 0 10px 26px -24px var(--shadow-soft);
+}
+.main .cast::after {
+    content: "";
+    display: block;
+    bottom: 0;
+    position: absolute;
+    width: 40%;
+    height: 3px;
+    background: var(--line-color);
+    left: 50%;
+    transform: translate(-50%,0);
+}
+.main .cast h3 {
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    line-height: 1.6;
+    font-weight: 550;
+    color: var(--text-color-black);
+    padding: 16px 18px;
+}
+
+.main h1 {
+    margin-top: 16px;
+    color: var(--text-color-gold-deep);
+    font-size: clamp(1.8rem, 2.6vw, 2.8rem);
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+}
+
+.main h1 span {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.9em;
+    color: var(--text-color-gold);
+}
+
+@media (max-width: 640px) {
+    html, body {
+        height: auto;
+        min-height: 100%;
+        overflow: auto;
+    }
+
+    body {
+        display: block;
+    }
+
+    .top {
+        height: 26vh;
+    }
+
+    .main {
+        padding-left: 18px;
+        padding-right: 18px;
+        overflow: visible;
+    }
+
+    .main .cast {
+        gap: 20px;
+    }
+
+    .main .cast h3 {
+        width: 100%;
+    }
+}
