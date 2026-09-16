@@ -125,6 +125,7 @@ body:not(.page-open) .main {
 .top .hero-image {
     width: min(420px, 55vw);
     height: auto;
+    max-height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 8px 14px rgba(155, 117, 36, 0.12));
     opacity: 0.98;
@@ -191,7 +192,7 @@ body:not(.page-open) .main {
 .mainT .gold:first-child {
     font-size: 3em;
     display: inline-block;
-    transform: translateY(-0.08em);
+    transform: translateY(0.1em);
     line-height: 0.9;
 }
 
@@ -300,11 +301,26 @@ body:not(.page-open) .main {
     transform: translateX(-50%) translateY(0);
 }
 
+@media (max-height: 600px) {
+    html, body {
+        height: auto;
+        min-height: 100%;
+        overflow: visible;
+    }
+    body {
+        display: block;
+    }
+    .main {
+        overflow-y: auto;
+    }
+    
+}
+
 @media (max-width: 640px) {
     html, body {
         height: auto;
         min-height: 100%;
-        overflow: auto;
+        overflow: visible;
     }
 
     body {
@@ -327,5 +343,14 @@ body:not(.page-open) .main {
 
     .main .cast h3 {
         width: 100%;
+    }
+}
+@media (max-width: 420px) {
+    p:last-child {
+        display: flex;
+        flex-direction: column;
+    }
+    .disable {
+        display: none;
     }
 }
